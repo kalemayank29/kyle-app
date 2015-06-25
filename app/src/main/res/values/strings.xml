@@ -78,4 +78,6 @@
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_form_1">Form_1</string>
+    <string name="title_activity_page_one">PageOne</string>
+    <string name="title_activity_page_two">PageTwo</string>
 </resources>

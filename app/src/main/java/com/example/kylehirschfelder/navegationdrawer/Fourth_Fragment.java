@@ -48,7 +48,7 @@ public class Fourth_Fragment extends Fragment {
         formButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                Intent intent = new Intent(getActivity(), Form_1.class);
+                Intent intent = new Intent(getActivity(), PageOne.class);
                 startActivity(intent);
             }
         });

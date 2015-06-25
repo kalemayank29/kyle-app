@@ -26,6 +26,14 @@
             android:name=".Form_1"
             android:label="@string/title_activity_form_1" >
         </activity>
+        <activity
+            android:name=".PageOne"
+            android:label="@string/title_activity_page_one" >
+        </activity>
+        <activity
+            android:name=".PageTwo"
+            android:label="@string/title_activity_page_two" >
+        </activity>
     </application>
 
 </manifest>
