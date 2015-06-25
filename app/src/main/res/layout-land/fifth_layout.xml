@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editName"
+        android:minWidth="200dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="131dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/editBug"
+        android:layout_below="@+id/editName"
+        android:layout_alignLeft="@+id/editName"
+        android:layout_alignStart="@+id/editName"
+        android:minWidth="200dp"
+        android:layout_alignRight="@+id/editName"
+        android:layout_alignEnd="@+id/editName" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinCat"
+        android:layout_below="@+id/editBug"
+        android:layout_alignLeft="@+id/editBug"
+        android:layout_alignStart="@+id/editBug" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinImport"
+        android:layout_below="@+id/spinCat"
+        android:layout_alignLeft="@+id/spinCat"
+        android:layout_alignStart="@+id/spinCat" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:id="@+id/bugButton"
+        android:layout_below="@+id/spinImport"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
