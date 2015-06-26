@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
@@ -35,7 +36,7 @@ public class Fourth_Fragment extends Fragment {
 
     View myView;
     Button formButton;
-
+    TextView censusForm;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
@@ -44,7 +45,7 @@ public class Fourth_Fragment extends Fragment {
 
         myView = inflater.inflate(R.layout.fourth_layout, container,false);
         formButton = (Button) myView.findViewById(R.id.formOneButton);
-
+        censusForm = (TextView) myView.findViewById(R.id.census_form);
         formButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
@@ -52,6 +53,14 @@ public class Fourth_Fragment extends Fragment {
                 startActivity(intent);
             }
         });
+        censusForm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                Intent intentx = new Intent(getActivity(), PageOne.class);
+                startActivity(intentx);
+            }
+        });
+
         return myView;
     }
 }

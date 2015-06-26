@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -34,24 +35,17 @@ import java.util.List;
 
 public class PageOne extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
-
     Button formButton;
-    String caste, pbus, abus1, abus2, abus3, wall_a,wall_b,wall_c, wall_d, wall_e;
+    String isCement, isBrick, isSand, isJunk, isOthers, religion, electricity, house_owner,
+            caste, pbus, abus1, abus2, abus3, wall_a,wall_b,wall_c, wall_d, wall_e, isFam;
 
-    int farmdrya, farmdryg, farmweta, farmwetg,
-            roof, electricity, houseowner, animal, oldhouseid,
-            oldfamily, toiletuse, toilet, cook, kitchen, water,
-            thing, religion, familyid;
+    EditText casteId, pbusId, abus1Id, abus2Id, abus3Id, famId;
     Spinner religionSpinner, electricitySpinner, house_ownershipSpinner,
-            toiletsSpinner, toilet_usersSpinner, separate_kitchenSpinner,
+            toiletsSpinner, toilet_usersSpinner,
             waterSpinner;
+
     CheckBox cementBox, sandBox, junkBox, brickBox, otherBox;
-
-    View myView;
-
     Boolean cement, brick, sand, junk, other;
-    String isCement, isBrick, isSand, isJunk, isOthers;
-
     Button newButton;
 
     @SuppressLint("NewApi")
@@ -63,30 +57,33 @@ public class PageOne extends AppCompatActivity implements AdapterView.OnItemSele
         religionSpinner = (Spinner) findViewById(R.id.spinReligion);
         electricitySpinner = (Spinner) findViewById(R.id.spinElec);
         house_ownershipSpinner = (Spinner) findViewById(R.id.spinHouseOwner);
-        separate_kitchenSpinner = (Spinner) findViewById(R.id.spinSeparateKitchen);
-
-        ArrayAdapter adapterRel = ArrayAdapter.createFromResource(this, R.array.religion, android.R.layout.simple_spinner_dropdown_item);
-        ArrayAdapter adapterElec = ArrayAdapter.createFromResource(this, R.array.electricity, android.R.layout.simple_spinner_dropdown_item);
-        ArrayAdapter adapterHouseOwner = ArrayAdapter.createFromResource(this, R.array.house_ownership, android.R.layout.simple_spinner_dropdown_item);
-
-        ArrayAdapter adapterKitchen = ArrayAdapter.createFromResource(this, R.array.seperate_room_for_kitchen, android.R.layout.simple_spinner_dropdown_item);
-
-        religionSpinner.setAdapter(adapterRel);
-        electricitySpinner.setAdapter(adapterElec);
-        house_ownershipSpinner.setAdapter(adapterHouseOwner);
-        separate_kitchenSpinner.setAdapter(adapterKitchen);
 
         cementBox = (CheckBox) findViewById(R.id.cementCheck);
         brickBox = (CheckBox) findViewById(R.id.brickCheck);
         sandBox = (CheckBox) findViewById(R.id.sandCheck);
         junkBox = (CheckBox) findViewById(R.id.junkCheck);
         otherBox = (CheckBox) findViewById(R.id.otherCheck);
-
+        famId = (EditText) findViewById(R.id.famId);
+        pbusId = (EditText) findViewById(R.id.pBusId);
+        abus1Id = (EditText) findViewById(R.id.aBus1Id);
+        abus2Id = (EditText) findViewById(R.id.aBus2Id);
+        abus3Id = (EditText) findViewById(R.id.aBus3Id);
+        casteId = (EditText) findViewById(R.id.casteId);
         newButton = (Button) findViewById(R.id.next);
+
+        final Intent dataTransfer = new Intent(PageOne.this, PageTwo.class);
+
+        ArrayAdapter adapterRel = ArrayAdapter.createFromResource(this, R.array.religion, android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter adapterElec = ArrayAdapter.createFromResource(this, R.array.electricity, android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter adapterHouseOwner = ArrayAdapter.createFromResource(this, R.array.house_ownership, android.R.layout.simple_spinner_dropdown_item);
+
+        religionSpinner.setAdapter(adapterRel);
+        electricitySpinner.setAdapter(adapterElec);
+        house_ownershipSpinner.setAdapter(adapterHouseOwner);
+
         newButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //startActivity(new Intent(PageOne.this, PageTwo.class));
                 cement = cementBox.isChecked();
                 brick = brickBox.isChecked();
                 sand = sandBox.isChecked();
@@ -107,10 +104,62 @@ public class PageOne extends AppCompatActivity implements AdapterView.OnItemSele
 
                 if(other) isOthers = "16";
                     else isOthers = "0";
+
+                isFam = famId.getText().toString();
+                caste = casteId.getText().toString();
+                pbus = pbusId.getText().toString();
+                abus1 = abus1Id.getText().toString();
+                abus2 = abus2Id.getText().toString();
+                abus3 = abus3Id.getText().toString();
+                religion = religionSpinner.getSelectedItem().toString();
+                switch (religion){
+                    case "Hindu": religion = "1";
+                        break;
+                    case "Muslum": religion = "2";
+                        break;
+                    case "Christian": religion = "4";
+                        break;
+                    case "Sikh": religion = "8";
+                        break;
+                    case "Jain": religion = "16";
+                        break;
+                    case "Buddhism": religion = "32";
+                        break;
+                }
+
+                electricity = electricitySpinner.getSelectedItem().toString();
+                switch(electricity){
+                    case "Yes": electricity = "1";
+                        break;
+                    case "No": electricity = "0";
+                        break;
+                }
+                house_owner = house_ownershipSpinner.getSelectedItem().toString();
+                switch(house_owner){
+                    case "Owned": house_owner = "1";
+                        break;
+                    case "Rented": house_owner = "0";
+                        break;
+                }
+
+                dataTransfer.putExtra("wall_a", isCement);
+                dataTransfer.putExtra("wall_b", isBrick);
+                dataTransfer.putExtra("wall_c", isSand);
+                dataTransfer.putExtra("wall_d", isJunk);
+                dataTransfer.putExtra("wall_e", isOthers);
+                dataTransfer.putExtra("p_business", pbus);
+                dataTransfer.putExtra("a_bus_1", abus1);
+                dataTransfer.putExtra("a_bus_2", abus2);
+                dataTransfer.putExtra("a_bus_3", abus3);
+                dataTransfer.putExtra("caste", caste);
+                dataTransfer.putExtra("religion", religion);
+                dataTransfer.putExtra("electricity", electricity);
+                dataTransfer.putExtra("house_owner", house_owner);
+                dataTransfer.putExtra("fam", isFam);
+                startActivity(dataTransfer);
+
             }
         });
-
-
     }
 
     @Override

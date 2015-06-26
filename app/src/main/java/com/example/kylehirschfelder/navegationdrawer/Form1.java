@@ -55,7 +55,6 @@ public class Form1 extends Fragment {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        //formButton = (Button) myView.findViewById(R.id.formButton);
 
         //Declaring all the spinners and linking to their IDs
         religionSpinner = (Spinner) myView.findViewById(R.id.spinReligion);
@@ -196,3 +195,92 @@ public class Form1 extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 }
+
+
+
+
+
+
+
+
+
+
+/*
+
+
+Calendar c = Calendar.getInstance();
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                String newDate = df.format(c.getTime());
+
+
+                InputStream is;
+                List<NameValuePair> NameValuePairs = new ArrayList<NameValuePair>();
+                NameValuePairs.add(new BasicNameValuePair("family_id", Integer.toString(familyid)));
+                NameValuePairs.add(new BasicNameValuePair("caste", caste));
+                NameValuePairs.add(new BasicNameValuePair("religion", Integer.toString(religion)));
+                NameValuePairs.add(new BasicNameValuePair("p_business", pbus));
+                NameValuePairs.add(new BasicNameValuePair("a_business_1", abus1));
+                NameValuePairs.add(new BasicNameValuePair("a_business_2", abus2));
+                NameValuePairs.add(new BasicNameValuePair("a_business_3", abus3));
+                NameValuePairs.add(new BasicNameValuePair("farm_dry_a", Integer.toString(farmdrya)));
+                NameValuePairs.add(new BasicNameValuePair("farm_dry_g", Integer.toString(farmdryg)));
+                NameValuePairs.add(new BasicNameValuePair("farm_wet_a", Integer.toString(farmweta)));
+                NameValuePairs.add(new BasicNameValuePair("farm_wet_g", Integer.toString(farmwetg)));
+
+                NameValuePairs.add(new BasicNameValuePair("wall_a", isCement));
+                NameValuePairs.add(new BasicNameValuePair("wall_b", isBrick));
+                NameValuePairs.add(new BasicNameValuePair("wall_c", isSand));
+                NameValuePairs.add(new BasicNameValuePair("wall_d", isJunk));
+                NameValuePairs.add(new BasicNameValuePair("wall_e", isOthers));
+
+                NameValuePairs.add(new BasicNameValuePair("roof", Integer.toString(roof)));
+                NameValuePairs.add(new BasicNameValuePair("electricity", Integer.toString(electricity)));
+                NameValuePairs.add(new BasicNameValuePair("house_owner", Integer.toString(houseowner)));
+                NameValuePairs.add(new BasicNameValuePair("toilet", Integer.toString(toilet)));
+                NameValuePairs.add(new BasicNameValuePair("toilet_use", Integer.toString(toiletuse)));
+                NameValuePairs.add(new BasicNameValuePair("cook", Integer.toString(cook)));
+                NameValuePairs.add(new BasicNameValuePair("kitchen", Integer.toString(kitchen)));
+                NameValuePairs.add(new BasicNameValuePair("water", Integer.toString(water)));
+                NameValuePairs.add(new BasicNameValuePair("thing", Integer.toString(thing)));
+                NameValuePairs.add(new BasicNameValuePair("animal", Integer.toString(animal)));
+                NameValuePairs.add(new BasicNameValuePair("old_house_id", Integer.toString(oldhouseid)));
+                NameValuePairs.add(new BasicNameValuePair("old_family_id", Integer.toString(oldfamily)));
+                NameValuePairs.add(new BasicNameValuePair("date", newDate));
+
+                try {
+                    HttpClient httpClient = new DefaultHttpClient();
+                    HttpPost httpPost = new HttpPost("http://45.55.84.23/census/submit");
+                    httpPost.setEntity(new UrlEncodedFormEntity(NameValuePairs));
+                    HttpResponse response = httpClient.execute(httpPost);
+                    HttpEntity entity = response.getEntity();
+                    is = entity.getContent();
+
+                    //informs the user that their bug was submitted successfully
+                    String msg = "Your form has been submitted";
+                    Toast.makeText(getBaseContext(), msg, Toast.LENGTH_LONG).show();
+                    Log.w(NameValuePairs.toString(), "Here");
+
+                } catch (ClientProtocolException e) {
+                    Log.e("ClientProtocol", "log_tag");
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    Log.e("log_tag", "IOException");
+                    e.printStackTrace();
+                }
+
+
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+

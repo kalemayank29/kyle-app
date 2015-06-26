@@ -27,7 +27,9 @@
             android:text="Cement"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:checked="false"
+            android:id="@+id/cementCheck" />
 
         <CheckBox
             android:layout_width="fill_parent"
@@ -35,7 +37,8 @@
             android:text="Mangalore Tiles"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:id="@+id/mangaloreCheck"/>
 
         <CheckBox
             android:layout_width="fill_parent"
@@ -43,7 +46,8 @@
             android:text="Normal Tiles"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:id="@+id/normalCheck"/>
 
         <CheckBox
             android:layout_width="fill_parent"
@@ -51,7 +55,8 @@
             android:text="Tin"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:id="@+id/tinCheck"/>
 
         <CheckBox
             android:layout_width="fill_parent"
@@ -59,7 +64,8 @@
             android:text="Grass"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:id="@+id/grassCheck"/>
 
         <CheckBox
             android:layout_width="fill_parent"
@@ -67,7 +73,8 @@
             android:text="Others"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:id="@+id/other_roofCheck"/>
 
 
     </LinearLayout>
@@ -95,7 +102,8 @@
             android:text="Light"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:id="@+id/lightCheck"/>
 
         <CheckBox
             android:layout_width="fill_parent"
@@ -103,7 +111,8 @@
             android:text="Gas"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:id="@+id/gasCheck"/>
 
         <CheckBox
             android:layout_width="fill_parent"
@@ -111,7 +120,8 @@
             android:text="Coal"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:id="@+id/coalCheck"/>
 
         <CheckBox
             android:layout_width="fill_parent"
@@ -119,7 +129,8 @@
             android:text="Wood"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:id="@+id/woodCheck"/>
 
 
         <CheckBox
@@ -128,7 +139,8 @@
             android:text="Others"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:id="@+id/others_cookingCheck"/>
 
 
     </LinearLayout>
@@ -156,7 +168,8 @@
             android:text="Well"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:id="@+id/wellCheck"/>
 
         <CheckBox
             android:layout_width="fill_parent"
@@ -164,7 +177,8 @@
             android:text="Tap"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:id="@+id/tapCheck"/>
 
         <CheckBox
             android:layout_width="fill_parent"
@@ -172,7 +186,8 @@
             android:text="Lake"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:id="@+id/lakeCheck"/>
 
         <CheckBox
             android:layout_width="fill_parent"
@@ -180,7 +195,8 @@
             android:text="River"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:id="@+id/riverCheck"/>
 
 
         <CheckBox
@@ -189,7 +205,8 @@
             android:text="Canal"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:id="@+id/canalCheck"/>
 
         <CheckBox
             android:layout_width="fill_parent"
@@ -197,7 +214,9 @@
             android:text="Handpump"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:id="@+id/handpumpCheck"/>
+
 
     </LinearLayout>
 
@@ -209,13 +228,39 @@
         android:layout_marginLeft="80dp"
         android:layout_marginTop="40dp">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            android:text="Is there a toilet?"
+            android:layout_marginTop="5dp"
+            android:textColor="#000000"
+            android:layout_marginLeft="10dp"
+            android:textStyle="bold"
+            />
+
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/spinToilets"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="59dp"
+            android:background="@drawable/spinner"/>
 
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            android:text="Does everyone use it?"
+            android:layout_marginTop="10dp"
+            android:textColor="#000000"
+            android:layout_marginLeft="10dp"
+            android:textStyle="bold"
+            />
 
         <Spinner
             android:layout_width="wrap_content"
@@ -223,8 +268,43 @@
             android:id="@+id/spinToiletUsers"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="59dp"
+            android:background="@drawable/spinner"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            android:text="Separate room for kitchen?"
+            android:layout_marginTop="10dp"
+            android:textColor="#000000"
+            android:layout_marginLeft="10dp"
+            android:textStyle="bold"
+            />
+
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinSeparateKitchen"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="59dp"
+            android:background="@drawable/spinner"
+            />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:id="@+id/submitBtn"
+            android:layout_marginTop="20dp"/>
 
     </LinearLayout>
 </LinearLayout>

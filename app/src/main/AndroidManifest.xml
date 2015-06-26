@@ -28,12 +28,16 @@
         </activity>
         <activity
             android:name=".PageOne"
-            android:label="@string/title_activity_page_one" >
+            android:label="@string/title_activity_page_one"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateHidden">
         </activity>
         <activity
             android:name=".PageTwo"
-            android:label="@string/title_activity_page_two" >
+            android:label="@string/title_activity_page_two"
+            android:screenOrientation="landscape">
         </activity>
+
     </application>
 
 </manifest>

@@ -1,16 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content" android:layout_height="wrap_content">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/formOneButton"
+        android:layout_marginLeft="223dp"
+        android:layout_marginStart="223dp"
+        android:background="@drawable/healthbook"
+        android:layout_marginTop="150dp"
+        android:padding="75dp"
+         />
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/formOneButton"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="228dp"
-        android:layout_marginStart="228dp"
-        android:layout_marginTop="145dp"
-        android:text="Form 1" />
-</RelativeLayout>
+        android:text="Census Form"
+        android:layout_marginLeft="205dp"
+        android:layout_marginTop="7dp"
+        android:textColor="#000000"
+        android:onClick="onClick"
+        android:clickable="true"
+        android:id="@+id/census_form"
+        />
+    </LinearLayout>
