@@ -50,7 +50,7 @@ public class Form1 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-
+        myView = inflater.inflate(R.layout.test_push, container,false);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -58,13 +58,13 @@ public class Form1 extends Fragment {
         //formButton = (Button) myView.findViewById(R.id.formButton);
 
         //Declaring all the spinners and linking to their IDs
-        // religionSpinner = (Spinner) myView.findViewById(R.id.spinReligion);
-        // electricitySpinner = (Spinner) myView.findViewById(R.id.spinElec);
-        // house_ownershipSpinner = (Spinner) myView.findViewById(R.id.spinHouseOwner);
-        // toiletsSpinner = (Spinner) myView.findViewById(R.id.spinToilets);
-        // toilet_usersSpinner = (Spinner) myView.findViewById(R.id.spinToilerUsers);
-        // separate_kitchenSpinner = (Spinner) myView.findViewById(R.id.spinSeparateKitchen);
-        // waterSpinner = (Spinner) myView.findViewById(R.id.spinWater);
+        religionSpinner = (Spinner) myView.findViewById(R.id.spinReligion);
+        electricitySpinner = (Spinner) myView.findViewById(R.id.spinElec);
+        house_ownershipSpinner = (Spinner) myView.findViewById(R.id.spinHouseOwner);
+        toiletsSpinner = (Spinner) myView.findViewById(R.id.spinToilets);
+        toilet_usersSpinner = (Spinner) myView.findViewById(R.id.spinToiletUsers);
+        separate_kitchenSpinner = (Spinner) myView.findViewById(R.id.spinSeparateKitchen);
+        waterSpinner = (Spinner) myView.findViewById(R.id.spinWater);
 
         ArrayAdapter adapterRel = ArrayAdapter.createFromResource(getActivity().getBaseContext(), R.array.religion, android.R.layout.simple_spinner_dropdown_item);
         ArrayAdapter adapterElec = ArrayAdapter.createFromResource(getActivity().getBaseContext(), R.array.electricity, android.R.layout.simple_spinner_dropdown_item);
