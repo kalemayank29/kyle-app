@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -44,8 +45,12 @@ public class PageOne extends AppCompatActivity implements AdapterView.OnItemSele
     Spinner religionSpinner, electricitySpinner, house_ownershipSpinner,
             toiletsSpinner, toilet_usersSpinner, separate_kitchenSpinner,
             waterSpinner;
+    CheckBox cementBox, sandBox, junkBox, brickBox, otherBox;
 
     View myView;
+
+    Boolean cement, brick, sand, junk, other;
+    String isCement, isBrick, isSand, isJunk, isOthers;
 
     Button newButton;
 
@@ -71,13 +76,37 @@ public class PageOne extends AppCompatActivity implements AdapterView.OnItemSele
         house_ownershipSpinner.setAdapter(adapterHouseOwner);
         separate_kitchenSpinner.setAdapter(adapterKitchen);
 
+        cementBox = (CheckBox) findViewById(R.id.cementCheck);
+        brickBox = (CheckBox) findViewById(R.id.brickCheck);
+        sandBox = (CheckBox) findViewById(R.id.sandCheck);
+        junkBox = (CheckBox) findViewById(R.id.junkCheck);
+        otherBox = (CheckBox) findViewById(R.id.otherCheck);
 
         newButton = (Button) findViewById(R.id.next);
         newButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(PageOne.this, PageTwo.class));
+                //startActivity(new Intent(PageOne.this, PageTwo.class));
+                cement = cementBox.isChecked();
+                brick = brickBox.isChecked();
+                sand = sandBox.isChecked();
+                junk = junkBox.isChecked();
+                other = otherBox.isChecked();
 
+                if(cement) isCement = "1";
+                    else isCement = "0";
+
+                if(brick) isBrick = "2";
+                    else isBrick = "0";
+
+                if(sand) isSand = "4";
+                    else isSand = "0";
+
+                if(junk) isJunk = "8";
+                    else isJunk = "0";
+
+                if(other) isOthers = "16";
+                    else isOthers = "0";
             }
         });
 

@@ -92,7 +92,9 @@
             android:text="Cement"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:checked="false"
+            android:id="@+id/cementCheck" />
 
         <CheckBox
             android:layout_width="fill_parent"
@@ -100,7 +102,9 @@
             android:text="Brick"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:checked="false"
+            android:id="@+id/brickCheck" />
 
         <CheckBox
             android:layout_width="fill_parent"
@@ -108,7 +112,9 @@
             android:text="Sand"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:checked="false"
+            android:id="@+id/sandCheck" />
 
         <CheckBox
             android:layout_width="fill_parent"
@@ -116,7 +122,9 @@
             android:text="Junk"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:checked="false"
+            android:id="@+id/junkCheck" />
 
         <CheckBox
             android:layout_width="fill_parent"
@@ -124,7 +132,9 @@
             android:text="Others"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:checked="false"
+            android:id="@+id/otherCheck" />
 
         <Button
             android:layout_height="wrap_content"
