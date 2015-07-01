@@ -5,14 +5,18 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
@@ -31,6 +35,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.BitSet;
 
 public class PageTwo extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
@@ -52,7 +57,19 @@ public class PageTwo extends AppCompatActivity implements AdapterView.OnItemSele
             wall_a, wall_b, wall_c, wall_d, wall_e, caste, pbus, abus1,
             abus2, abus3, isFam;
 
+    private static final int EDIT = 0, DELETE = 1;
+
     Button submit;
+
+    List<Census> censusList = new ArrayList<Census>();
+
+    DatabaseHandler dbHandler;
+
+    ArrayAdapter<Census> censusAdapter;
+
+    int longClickItemIndex;
+
+    ListView lv;
 
     @SuppressLint("NewApi")
     @Override
@@ -66,7 +83,8 @@ public class PageTwo extends AppCompatActivity implements AdapterView.OnItemSele
         setContentView(R.layout.page_two);
 
         submit = (Button) findViewById(R.id.submitBtn);
-
+        dbHandler = new DatabaseHandler(getApplicationContext());
+        //lv = (ListView) findViewById(R.id.listView3);
         cementBox = (CheckBox) findViewById(R.id.cementCheck);
         mangaloreBox = (CheckBox) findViewById(R.id.mangaloreCheck);
         normal_tilesBox = (CheckBox) findViewById(R.id.normalCheck);
@@ -113,6 +131,14 @@ public class PageTwo extends AppCompatActivity implements AdapterView.OnItemSele
         spinToilets.setAdapter(adapterToilets);
         separate_kitchenSpinner.setAdapter(adapterKitchen);
 
+        //registerForContextMenu(lv);
+        //lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        //    @Override
+        //    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        //        longClickItemIndex = position;
+        //        return false;
+        //    }
+       // });
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -197,6 +223,7 @@ public class PageTwo extends AppCompatActivity implements AdapterView.OnItemSele
                     case "No": isKitchen = "0";
                         break;
                 }
+
                 Calendar c = Calendar.getInstance();
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                 String newDate = df.format(c.getTime());
@@ -240,7 +267,90 @@ public class PageTwo extends AppCompatActivity implements AdapterView.OnItemSele
                 NameValuePairs.add(new BasicNameValuePair("water_f", isCanal));
                 NameValuePairs.add(new BasicNameValuePair("date", newDate));
 
+                //..................................................................................
+                BitSet wall = new BitSet(5);
+                BitSet roof = new BitSet(6);
+                BitSet cook = new BitSet(5);
+                BitSet water = new BitSet(6);
 
+                if(!wall_a.equals("0"))
+                    wall.flip(0);
+
+                if(!wall_b.equals("0"))
+                    wall.flip(1);
+
+                if(!wall_c.equals("0"))
+                    wall.flip(2);
+
+                if(!wall_d.equals("0"))
+                    wall.flip(3);
+
+                if(!wall_e.equals("0"))
+                    wall.flip(4);
+
+
+                if(!isCement.equals("0"))
+                    roof.flip(0);
+
+                if(!isMangalore.equals("0"))
+                    roof.flip(1);
+
+                if(!isNormal_tiles.equals("0"))
+                    roof.flip(2);
+
+                if(!isTin.equals("0"))
+                    roof.flip(3);
+
+                if(!isGrass.equals("0"))
+                    roof.flip(4);
+
+                if(!isOther_roof.equals("0"))
+                    roof.flip(5);
+
+
+                if(!isLight.equals("0"))
+                    cook.flip(0);
+
+                if(!isGas.equals("0"))
+                    cook.flip(1);
+
+                if(!isCoal.equals("0"))
+                    cook.flip(2);
+
+                if(!isWood.equals("0"))
+                    cook.flip(3);
+
+                if(!isOther_cooking.equals("0"))
+                    cook.flip(4);
+
+
+                if(!isWell.equals("0"))
+                    water.flip(0);
+
+                if(!isHandpump.equals("0"))
+                    water.flip(1);
+
+                if(!isTap.equals("0"))
+                    water.flip(2);
+
+                if(!isLake.equals("0"))
+                    water.flip(3);
+
+                if(!isRiver.equals("0"))
+                    water.flip(4);
+
+                //..................................................................................
+
+                Census census = new Census(dbHandler.getCensusCount(),String.valueOf(caste),
+                        String.valueOf(isReligion), String.valueOf(pbus), String.valueOf(abus1),
+                        String.valueOf(abus2), String.valueOf(abus3), String.valueOf(wall),
+                        String.valueOf(roof), String.valueOf(isElec), String.valueOf(isHouse_owner),
+                        String.valueOf(isToilet), String.valueOf(isToiletUser), String.valueOf(cook),
+                        String.valueOf(isKitchen), String.valueOf(water), String.valueOf(newDate));
+
+                dbHandler.createCensus(census);
+                censusList.add(census);
+                censusAdapter.notifyDataSetChanged();
 
 
                 try {
@@ -266,6 +376,114 @@ public class PageTwo extends AppCompatActivity implements AdapterView.OnItemSele
 
             }
         });
+
+        List<Census> addablePatients = dbHandler.getAllCensus();
+        int censusCount = dbHandler.getCensusCount();
+
+        for(int i = 0; i < censusCount; i++){
+            censusList.add(addablePatients.get(i));
+        }
+
+        if(dbHandler.getCensusCount() != 0){
+            censusList.addAll(dbHandler.getAllCensus());
+        }
+        //populateList();
+    }
+
+    public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo info){
+        super.onCreateContextMenu(menu, view, info);
+        menu.setHeaderIcon(R.drawable.edit_icon);
+        menu.setHeaderTitle("Patient Options");
+        menu.add(Menu.NONE, EDIT, menu.NONE, "Edit Patient");
+        menu.add(Menu.NONE, DELETE, menu.NONE, "Delete Patient");
+
+    }
+
+    public boolean onContextItemSelected(MenuItem item){
+        switch(item.getItemId()){
+            case EDIT:
+                //TODO: Implement editing a patient
+                break;
+            case DELETE:
+
+                dbHandler.deleteContact(censusList.get(longClickItemIndex));
+                censusList.remove(longClickItemIndex);
+                censusAdapter.notifyDataSetChanged();
+                break;
+        }
+        return super.onContextItemSelected(item);
+    }
+
+
+ //   public void populateList(){
+ //       censusAdapter = new CensusListAdapter();
+ //       lv.setAdapter(censusAdapter);
+ //   }
+
+    //..............................................................................................
+
+    private class CensusListAdapter extends ArrayAdapter<Census> {
+        public CensusListAdapter(){
+            super (PageTwo.this, R.layout.listview_item, censusList);
+        }
+        @Override
+
+        public View getView(int position, View view, ViewGroup parent){
+            if(view == null)
+                view = getLayoutInflater().inflate(R.layout.listview_item,parent, false);
+
+            Census currentCensus = censusList.get(position);
+
+            TextView familyid = (TextView) view.findViewById(R.id.editFamId);
+            familyid.setText(currentCensus.get_famid());
+
+            TextView caste = (TextView) view.findViewById(R.id.editCaste);
+            caste.setText(currentCensus.get_caste());
+
+            TextView primbus = (TextView) view.findViewById(R.id.editPrimaryBus);
+            primbus.setText(currentCensus.get_pbus());
+
+            TextView abus1 = (TextView) view.findViewById(R.id.editABus1);
+            abus1.setText(currentCensus.get_abus1());
+
+            TextView abus2 = (TextView) view.findViewById(R.id.editABus2);
+            abus2.setText(currentCensus.get_abus2());
+
+            TextView abus3 = (TextView) view.findViewById(R.id.editABus3);
+            abus3.setText(currentCensus.get_abus3());
+
+            TextView walls = (TextView) view.findViewById(R.id.editWalls);
+            walls.setText(currentCensus.get_wall());
+
+            TextView religion = (TextView) view.findViewById(R.id.editReligion);
+            religion.setText(currentCensus.get_religion());
+
+            TextView houseOwner = (TextView) view.findViewById(R.id.editHouseOwner);
+            houseOwner.setText(currentCensus.get_houseowner());
+
+            TextView elec = (TextView) view.findViewById(R.id.editElec);
+            elec.setText(currentCensus.get_electricity());
+
+            TextView roof = (TextView) view.findViewById(R.id.editRoof);
+            roof.setText(currentCensus.get_roof());
+
+            TextView cooking = (TextView) view.findViewById(R.id.editCooking);
+            cooking.setText(currentCensus.get_cook());
+
+            TextView water = (TextView) view.findViewById(R.id.editWater);
+            water.setText(currentCensus.get_water());
+
+            TextView toilet = (TextView) view.findViewById(R.id.editToilet);
+            toilet.setText(currentCensus.get_toilet());
+
+            TextView toiletUser = (TextView) view.findViewById(R.id.editToiletUsers);
+            toiletUser.setText(currentCensus.get_toiletuse());
+
+            TextView kitchen = (TextView) view.findViewById(R.id.editKitchen);
+            kitchen.setText(currentCensus.get_kitchen());
+
+            return view;
+        }
     }
 
     @Override

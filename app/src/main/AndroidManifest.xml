@@ -30,14 +30,17 @@
             android:name=".PageOne"
             android:label="@string/title_activity_page_one"
             android:screenOrientation="landscape"
-            android:windowSoftInputMode="stateHidden">
+            android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name=".PageTwo"
             android:label="@string/title_activity_page_two"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape" >
         </activity>
-
+        <activity
+            android:name=".viewCensusTable"
+            android:label="@string/title_activity_view_census_table" >
+        </activity>
     </application>
 
 </manifest>

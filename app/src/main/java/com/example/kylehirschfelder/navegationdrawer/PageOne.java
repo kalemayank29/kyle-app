@@ -90,20 +90,20 @@ public class PageOne extends AppCompatActivity implements AdapterView.OnItemSele
                 junk = junkBox.isChecked();
                 other = otherBox.isChecked();
 
-                if(cement) isCement = "1";
-                    else isCement = "0";
+                if (cement) isCement = "1";
+                else isCement = "0";
 
-                if(brick) isBrick = "2";
-                    else isBrick = "0";
+                if (brick) isBrick = "2";
+                else isBrick = "0";
 
-                if(sand) isSand = "4";
-                    else isSand = "0";
+                if (sand) isSand = "4";
+                else isSand = "0";
 
-                if(junk) isJunk = "8";
-                    else isJunk = "0";
+                if (junk) isJunk = "8";
+                else isJunk = "0";
 
-                if(other) isOthers = "16";
-                    else isOthers = "0";
+                if (other) isOthers = "16";
+                else isOthers = "0";
 
                 isFam = famId.getText().toString();
                 caste = casteId.getText().toString();
@@ -112,33 +112,43 @@ public class PageOne extends AppCompatActivity implements AdapterView.OnItemSele
                 abus2 = abus2Id.getText().toString();
                 abus3 = abus3Id.getText().toString();
                 religion = religionSpinner.getSelectedItem().toString();
-                switch (religion){
-                    case "Hindu": religion = "1";
+                switch (religion) {
+                    case "Hindu":
+                        religion = "1";
                         break;
-                    case "Muslum": religion = "2";
+                    case "Muslum":
+                        religion = "2";
                         break;
-                    case "Christian": religion = "4";
+                    case "Christian":
+                        religion = "4";
                         break;
-                    case "Sikh": religion = "8";
+                    case "Sikh":
+                        religion = "8";
                         break;
-                    case "Jain": religion = "16";
+                    case "Jain":
+                        religion = "16";
                         break;
-                    case "Buddhism": religion = "32";
+                    case "Buddhism":
+                        religion = "32";
                         break;
                 }
 
                 electricity = electricitySpinner.getSelectedItem().toString();
-                switch(electricity){
-                    case "Yes": electricity = "1";
+                switch (electricity) {
+                    case "Yes":
+                        electricity = "1";
                         break;
-                    case "No": electricity = "0";
+                    case "No":
+                        electricity = "0";
                         break;
                 }
                 house_owner = house_ownershipSpinner.getSelectedItem().toString();
-                switch(house_owner){
-                    case "Owned": house_owner = "1";
+                switch (house_owner) {
+                    case "Owned":
+                        house_owner = "1";
                         break;
-                    case "Rented": house_owner = "0";
+                    case "Rented":
+                        house_owner = "0";
                         break;
                 }
 
@@ -160,6 +170,7 @@ public class PageOne extends AppCompatActivity implements AdapterView.OnItemSele
 
             }
         });
+
     }
 
     @Override

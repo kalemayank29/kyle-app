@@ -4,6 +4,13 @@
     android:orientation="vertical">
 
     <Button
+        android:id="@+id/dbView_form"
+        android:layout_gravity="right"
+        android:background="@drawable/dbform"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+
+    <Button
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/formOneButton"
@@ -13,6 +20,7 @@
         android:layout_marginTop="150dp"
         android:padding="75dp"
          />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

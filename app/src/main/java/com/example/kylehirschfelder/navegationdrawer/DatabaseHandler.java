@@ -13,32 +13,24 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 
     public static final int DATABASE_VERSION = 1;
-    private static String DATABASE_NAME = "formManager",
+    private static final String DATABASE_NAME = "formManager",
     TABLE_CENSUS = "census",
+    KEY_FAMID = "family_id",
     KEY_CASTE = "caste",
     KEY_PBUS = "p_bus",
     KEY_ABUS1 = "a_bus_1",
     KEY_ABUS2 = "a_bus_2",
     KEY_ABUS3 = "a_bus_3",
-    KEY_FARMDRYA = "farm_dry_a",
-    KEY_FARMDRYG = "farm_dry_g",
-    KEY_FARMWETA = "farm_wet_a",
-    KEY_FARMWETG = "farm_wet_g",
     KEY_WALL = "wall",
     KEY_ROOF = "roof",
     KEY_ELECTRICITY = "electricity",
     KEY_HOUSEOWNER = "house_owner",
-    KEY_ANIMAL = "animal",
-    KEY_OLDHOUSEID = "old_house_id",
-    KEY_OLDFAMILY = "old_family_id",
     KEY_TOILETUSE = "toilet_use",
     KEY_TOILET = "toilet",
     KEY_COOK = "cook",
     KEY_KITCHEN = "kitchen",
     KEY_WATER = "water",
-    KEY_THING = "thing",
     KEY_DATE = "date",
-    KEY_HOUSEID = "house_id",
     KEY_RELIGION = "religion";
 
 
@@ -49,35 +41,26 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db){
-        db.execSQL("CREATE TABLE IF NOT EXISTS ASSIGNMENTS  "
+        db.execSQL("CREATE TABLE  "
                 + TABLE_CENSUS + "("
-                + KEY_HOUSEID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + KEY_CASTE + " VARCHAR,"
-                + KEY_RELIGION + " INT,"
-                + KEY_PBUS + " MEDIUMTEXT,"
-                + KEY_ABUS1 + " MEDIUMTEXT,"
-                + KEY_ABUS2 + " MEDIUMTEXT,"
-                + KEY_ABUS3 + " MEDIUMTEXT,"
-                + KEY_FARMDRYA + " INT,"
-                + KEY_FARMDRYG + " INT,"
-                + KEY_FARMWETA + " INT,"
-                + KEY_FARMWETG + " INT,"
-                + KEY_WALL + " INT,"
-                + KEY_ROOF + " INT,"
-                + KEY_ELECTRICITY + " INT,"
-                + KEY_HOUSEOWNER + " INT,"
-                + KEY_TOILET + " INT,"
-                + KEY_TOILETUSE + " INT,"
-                + KEY_COOK + " INT,"
-                + KEY_KITCHEN + " INT,"
-                + KEY_WATER + " INT,"
-                + KEY_THING + " INT,"
-                + KEY_ANIMAL + " INT,"
-                + KEY_OLDHOUSEID + " INT,"
-                + KEY_OLDFAMILY + " INT,"
-                + KEY_DATE + " INT);");
+                + KEY_FAMID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + KEY_CASTE + " VARCHAR, "
+                + KEY_RELIGION + " VARCHAR, "
+                + KEY_PBUS + " VARCHAR, "
+                + KEY_ABUS1 + " VARCHAR, "
+                + KEY_ABUS2 + " VARCHAR, "
+                + KEY_ABUS3 + " VARCHAR, "
+                + KEY_WALL + " VARCHAR, "
+                + KEY_ROOF + " VARCHAR, "
+                + KEY_ELECTRICITY + " VARCHAR, "
+                + KEY_HOUSEOWNER + " VARCHAR, "
+                + KEY_TOILET + " VARCHAR, "
+                + KEY_TOILETUSE + " VARCHAR, "
+                + KEY_COOK + " VARCHAR, "
+                + KEY_KITCHEN + " VARCHAR, "
+                + KEY_WATER + " VARCHAR, "
+                + KEY_DATE + " VARCHAR);");
     }
-
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -90,6 +73,82 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
 
+        values.put(KEY_FAMID, census.get_famid());
+        values.put(KEY_CASTE, census.get_caste());
+        values.put(KEY_RELIGION, census.get_religion());
+        values.put(KEY_PBUS, census.get_pbus());
+        values.put(KEY_ABUS1, census.get_abus1());
+        values.put(KEY_ABUS2, census.get_abus2());
+        values.put(KEY_ABUS3, census.get_abus3());
+        values.put(KEY_WALL, census.get_wall());
+        values.put(KEY_ROOF, census.get_roof());
+        values.put(KEY_ELECTRICITY, census.get_electricity());
+        values.put(KEY_HOUSEOWNER, census.get_houseowner());
+        values.put(KEY_TOILET, census.get_toilet());
+        values.put(KEY_TOILETUSE, census.get_toiletuse());
+        values.put(KEY_WATER, census.get_water());
+        values.put(KEY_DATE, census.get_date());
+
+        db.insert(TABLE_CENSUS, null, values);
+        db.close();
+    }
+
+    public Census getCensus(int id){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(TABLE_CENSUS, new String[] {KEY_FAMID, KEY_CASTE, KEY_RELIGION,
+                KEY_PBUS, KEY_ABUS1, KEY_ABUS2, KEY_ABUS3, KEY_WALL, KEY_ROOF, KEY_ELECTRICITY, KEY_HOUSEOWNER, KEY_TOILET,
+                KEY_TOILETUSE, KEY_WATER, KEY_DATE }, KEY_FAMID + "=?", new String[] {String.valueOf(id)}, null, null, null, null);
+
+        if(cursor != null)
+            cursor.moveToFirst();
+
+        Census census = new Census(Integer.parseInt(cursor.getString(0)), cursor.getString(1),
+                cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(5),
+                cursor.getString(6),cursor.getString(7),cursor.getString(8),cursor.getString(9),
+                cursor.getString(10),cursor.getString(11),cursor.getString(12),cursor.getString(13),
+                cursor.getString(14),cursor.getString(15),cursor.getString(16));
+        db.close();
+        cursor.close();
+        return census;
+    }
+
+
+    public void deleteContact(Census census){
+
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(TABLE_CENSUS, KEY_FAMID + "=?", new String[] {String.valueOf(census.get_famid())});
+        db.close();
+    }
+
+
+    public int getCensusCount(){
+
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CENSUS, null);
+        int c = cursor.getCount();
+        db.close();
+        cursor.close();
+        return c;
+    }
+
+    public List<Census> getAllCensus(){
+        List<Census> censusList = new ArrayList<Census>();
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CENSUS, null);
+
+        if(cursor.moveToFirst()){
+            do{
+                censusList.add(new Census(Integer.parseInt(cursor.getString(0)), cursor.getString(1),
+                        cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(5),
+                        cursor.getString(6),cursor.getString(7),cursor.getString(8),cursor.getString(9),
+                        cursor.getString(10),cursor.getString(11),cursor.getString(12),cursor.getString(13),
+                        cursor.getString(14),cursor.getString(15),cursor.getString(16)));
+            }
+            while(cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return censusList;
     }
 
 }
