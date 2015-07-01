@@ -151,7 +151,7 @@ public class PageOne extends AppCompatActivity implements AdapterView.OnItemSele
                         house_owner = "0";
                         break;
                 }
-
+                
                 dataTransfer.putExtra("wall_a", isCement);
                 dataTransfer.putExtra("wall_b", isBrick);
                 dataTransfer.putExtra("wall_c", isSand);

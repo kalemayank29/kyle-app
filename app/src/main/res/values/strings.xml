@@ -3,7 +3,7 @@
 
     <string name="title_section1">Profile</string>
     <string name="title_section2">Diagnostics</string>
-    <string name="title_section3">Health Information</string>
+    <string name="title_section3">Medicine Inventory</string>
     <string name="title_section4">Forms</string>
     <string name="title_section5">Submit a Bug</string>
 
@@ -82,10 +82,23 @@
 
     <string name="hello_world">Hello world!</string>
 
+    <string-array name="medicine_array">
+        <item>Aspirin</item>
+        <item>Caffeine</item>
+        <item>Ibuproffen</item>
+        <item>Acetoaminophen</item>
+        <item>Androgel</item>
+        <item>Cadeut</item>
+        <item>Calcitrol</item>
+        <item>Cantil</item>
+    </string-array>
+
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_form_1">Form_1</string>
     <string name="title_activity_page_one">PageOne</string>
     <string name="title_activity_page_two">PageTwo</string>
     <string name="title_activity_view_census_table">viewCensusTable</string>
+    <string name="title_activity_list_view_db">listViewDB</string>
+    <string name="title_activity_medicine_inventory">medicine_inventory</string>
 </resources>

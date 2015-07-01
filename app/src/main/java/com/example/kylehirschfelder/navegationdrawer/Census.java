@@ -39,6 +39,8 @@ public class Census {
         return _famid;
     }
 
+    public String get_famid_str() {return String.valueOf(_famid); }
+
     public String get_caste() {
         return _caste;
     }

@@ -36,7 +36,6 @@ public class Fourth_Fragment extends Fragment {
 
     View myView;
     Button formButton;
-    TextView censusForm;
     Button dbButton;
 
     @Override
@@ -47,7 +46,6 @@ public class Fourth_Fragment extends Fragment {
 
         myView = inflater.inflate(R.layout.fourth_layout, container,false);
         formButton = (Button) myView.findViewById(R.id.formOneButton);
-        censusForm = (TextView) myView.findViewById(R.id.census_form);
         dbButton = (Button) myView.findViewById(R.id.dbView_form);
 
         formButton.setOnClickListener(new View.OnClickListener() {
@@ -61,18 +59,11 @@ public class Fourth_Fragment extends Fragment {
         dbButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                Intent intent = new Intent(getActivity(), PageOne.class);
+                Intent intent = new Intent(getActivity(), listViewDB.class);
                 startActivity(intent);
             }
         });
 
-        censusForm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                Intent intentx = new Intent(getActivity(), PageOne.class);
-                startActivity(intentx);
-            }
-        });
         return myView;
     }
 }

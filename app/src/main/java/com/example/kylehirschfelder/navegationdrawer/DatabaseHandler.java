@@ -6,11 +6,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
+import android.provider.ContactsContract;
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
-
 
     public static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "formManager",
@@ -35,15 +37,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 
     public DatabaseHandler(Context context){
-
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+
     }
 
     @Override
     public void onCreate(SQLiteDatabase db){
-        db.execSQL("CREATE TABLE  "
+        db.execSQL("CREATE TABLE IF NOT EXISTS "
                 + TABLE_CENSUS + "("
-                + KEY_FAMID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + KEY_FAMID + " INTEGER PRIMARY KEY AUTO INCREMENT, "
                 + KEY_CASTE + " VARCHAR, "
                 + KEY_RELIGION + " VARCHAR, "
                 + KEY_PBUS + " VARCHAR, "
@@ -72,6 +74,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
+
 
         values.put(KEY_FAMID, census.get_famid());
         values.put(KEY_CASTE, census.get_caste());
@@ -112,7 +115,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return census;
     }
 
-
     public void deleteContact(Census census){
 
         SQLiteDatabase db = getWritableDatabase();
@@ -133,7 +135,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public List<Census> getAllCensus(){
         List<Census> censusList = new ArrayList<Census>();
-        SQLiteDatabase db = getWritableDatabase();
+        SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_CENSUS, null);
 
         if(cursor.moveToFirst()){
@@ -143,12 +145,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         cursor.getString(6),cursor.getString(7),cursor.getString(8),cursor.getString(9),
                         cursor.getString(10),cursor.getString(11),cursor.getString(12),cursor.getString(13),
                         cursor.getString(14),cursor.getString(15),cursor.getString(16)));
+
             }
             while(cursor.moveToNext());
+
+
         }
         cursor.close();
         db.close();
         return censusList;
     }
 
+    public void deleteAll() {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CENSUS);
+        db.close();
+    }
 }

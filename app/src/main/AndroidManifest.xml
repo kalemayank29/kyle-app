@@ -38,8 +38,12 @@
             android:screenOrientation="landscape" >
         </activity>
         <activity
-            android:name=".viewCensusTable"
-            android:label="@string/title_activity_view_census_table" >
+            android:name=".listViewDB"
+            android:label="@string/title_activity_list_view_db" >
+        </activity>
+        <activity
+            android:name=".medicine_inventory"
+            android:label="@string/title_activity_medicine_inventory" >
         </activity>
     </application>
 

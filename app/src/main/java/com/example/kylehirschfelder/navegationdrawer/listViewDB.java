@@ -1,57 +1,88 @@
-/*
-
 package com.example.kylehirschfelder.navegationdrawer;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.ContextMenu;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class viewCensusTable extends AppCompatActivity {
+public class listViewDB extends AppCompatActivity {
+
+    ListView lv;
+    DatabaseHandler db = new DatabaseHandler(this);
+    List<Census> censusList = new ArrayList<Census>();
+    ArrayAdapter<Census> censusAdapter;
+    int longClickItemIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_census_table);
-
-
-
-
-
-
-
-
-
-        List<Census> addablePatients = dbHandler.getAllCensus();
-        int censusCount = dbHandler.getCensusCount();
+        setContentView(R.layout.activity_list_view_db);
+        lv = (ListView) findViewById(R.id.dblistView);
+        List<Census> addablePatients = db.getAllCensus();
+        int censusCount = addablePatients.size();
 
         for(int i = 0; i < censusCount; i++){
-            censusList.add(addablePatients.get(i));
+           censusList.add(addablePatients.get(i));
         }
 
-        if(dbHandler.getCensusCount() != 0){
-            censusList.addAll(dbHandler.getAllCensus());
+        if(db.getCensusCount() != 0){
+            censusList.addAll(db.getAllCensus());
         }
         populateList();
+    }
 
+    public void populateList(){
+        censusAdapter = new CensusListAdapter();
+        lv.setAdapter(censusAdapter);
+        Log.w("made it to:", " populate list function");
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_list_view_db, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 
     private class CensusListAdapter extends ArrayAdapter<Census> {
         public CensusListAdapter(){
-            super (PageTwo.this, R.layout.listview_item, censusList);
+            super (listViewDB.this, R.layout.listview_item, censusList);
         }
-        @Override
 
+        @Override
         public View getView(int position, View view, ViewGroup parent){
             if(view == null)
                 view = getLayoutInflater().inflate(R.layout.listview_item,parent, false);
@@ -105,65 +136,9 @@ public class viewCensusTable extends AppCompatActivity {
 
             TextView kitchen = (TextView) view.findViewById(R.id.editKitchen);
             kitchen.setText(currentCensus.get_kitchen());
-
+            Log.w("made it to:", " census list adapter end");
             return view;
         }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_view_census_table, menu);
-        return true;
     }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
-    public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo info){
-        super.onCreateContextMenu(menu, view, info);
-        menu.setHeaderIcon(R.drawable.edit_icon);
-        menu.setHeaderTitle("Patient Options");
-        menu.add(Menu.NONE, EDIT, menu.NONE, "Edit Patient");
-        menu.add(Menu.NONE, DELETE, menu.NONE, "Delete Patient");
-
-    }
-
-    public boolean onContextItemSelected(MenuItem item){
-        switch(item.getItemId()){
-            case EDIT:
-                //TODO: Implement editing a patient
-                break;
-            case DELETE:
-
-                dbHandler.deleteContact(censusList.get(longClickItemIndex));
-                censusList.remove(longClickItemIndex);
-                censusAdapter.notifyDataSetChanged();
-                break;
-        }
-        return super.onContextItemSelected(item);
-    }
-
-
-    public void populateList(){
-        censusAdapter = new CensusListAdapter();
-        lv.setAdapter(censusAdapter);
-
-    }
-
 
 }
-*/

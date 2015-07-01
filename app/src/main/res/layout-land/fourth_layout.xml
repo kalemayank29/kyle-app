@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content" android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <Button
         android:id="@+id/dbView_form"
         android:layout_gravity="right"
-        android:background="@drawable/dbform"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
+        android:background="@drawable/clipboard"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:layout_alignParentStart="false"
+        android:layout_below="@+id/formOneButton"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="450dp"
+        android:layout_marginTop="-110dp" />
 
     <Button
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:id="@+id/formOneButton"
-        android:layout_marginLeft="223dp"
-        android:layout_marginStart="223dp"
-        android:background="@drawable/healthbook"
-        android:layout_marginTop="150dp"
+        android:background="@drawable/newform"
         android:padding="75dp"
-         />
+        android:layout_row="0"
+        android:layout_column="12"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="250dp"
+        android:layout_marginStart="250dp"
+        android:layout_marginTop="110dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Census Form"
-        android:layout_marginLeft="205dp"
-        android:layout_marginTop="7dp"
-        android:textColor="#000000"
-        android:onClick="onClick"
-        android:clickable="true"
-        android:id="@+id/census_form"
-        />
-    </LinearLayout>
+</RelativeLayout>

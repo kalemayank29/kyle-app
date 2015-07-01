@@ -3,7 +3,7 @@
     <!-- Base application theme. -->
     <style name="AppTheme1" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#957FEF</item>
+        <item name="colorPrimary">#c2000000</item>
         <item name="colorPrimaryDark">#7161EF</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:activatedBackgroundIndicator">@drawable/my_background</item>
