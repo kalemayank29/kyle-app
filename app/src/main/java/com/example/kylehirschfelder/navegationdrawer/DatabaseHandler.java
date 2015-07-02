@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.provider.ContactsContract;
 import android.util.Log;
 
+import java.sql.SQLClientInfoException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,6 +86,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_ABUS3, census.get_abus3());
         values.put(KEY_WALL, census.get_wall());
         values.put(KEY_ROOF, census.get_roof());
+        values.put(KEY_COOK, census.get_cook());
         values.put(KEY_ELECTRICITY, census.get_electricity());
         values.put(KEY_HOUSEOWNER, census.get_houseowner());
         values.put(KEY_TOILET, census.get_toilet());
@@ -133,5 +135,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return censusList;
+    }
+
+
+    public void deleteAll(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_CENSUS, null, null);
+        db.close();
     }
 }

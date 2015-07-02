@@ -3,6 +3,8 @@ package com.example.kylehirschfelder.navegationdrawer;
 import android.util.Log;
 import java.util.BitSet;
 
+import static android.text.TextUtils.split;
+
 public class Census {
 
     private String _caste, _pbus, _abus1, _abus2, _abus3, _wall,
@@ -73,42 +75,239 @@ public class Census {
 
     public String get_wallParse(String bitString) {
 
+        String uncompress= " ";
         bitString = bitString.substring(1, bitString.length()-1);
-        //bitString = StringUtils.strip(bitString, null);
-        Log.w(bitString, "Testing substring");
-        return bitString;
+        String[] parsed = split(bitString, ", ");
+
+        for(int i=0;i<parsed.length;i++)
+        {
+            if(parsed[i].equals("0")){
+                uncompress += "Cement,";
+            }
+
+            if(parsed[i].equals("1")){
+                uncompress += "Brick,";
+            }
+
+            if(parsed[i].equals("2")){
+                uncompress += "Sand,";
+            }
+
+            if(parsed[i].equals("3")){
+                uncompress += "Junk,";
+            }
+
+            if(parsed[i].equals("4")){
+                uncompress += "Others,";
+            }
+        }
+
+        return uncompress;
     }
 
     public String get_roof() {
         return _roof;
     }
 
+    public String get_roofParse(String bitString) {
+
+        String uncompress= " ";
+        bitString = bitString.substring(1, bitString.length()-1);
+        String[] parsed = split(bitString, ", ");
+
+        for(int i=0;i<parsed.length;i++)
+        {
+            if(parsed[i].equals("0")){
+                uncompress += "Cement,";
+            }
+
+            if(parsed[i].equals("1")){
+                uncompress += "Mangalore Tiles,";
+            }
+
+            if(parsed[i].equals("2")){
+                uncompress += "Normal Tiles,";
+            }
+
+            if(parsed[i].equals("3")){
+                uncompress += "Tin,";
+            }
+
+            if(parsed[i].equals("4")){
+                uncompress += "Grass,";
+            }
+
+            if(parsed[i].equals("5")){
+                uncompress += "Others,";
+            }
+        }
+
+        return uncompress;
+    }
+
     public String get_electricity() {
         return _electricity;
+    }
+
+    public String get_electricityParse() {
+        String parsed="";
+        switch (_electricity) {
+            case "1":
+                parsed= "Yes";
+                break;
+            case "0":
+                parsed = "No";
+                break;
+        }
+        return parsed;
     }
 
     public String get_houseowner() {
         return _houseowner;
     }
 
+    public String get_houseOwnerParse() {
+        String parsed="";
+        switch (_houseowner) {
+            case "1":
+                parsed= "Owned";
+                break;
+            case "0":
+                parsed = "Rented";
+                break;
+        }
+        return parsed;
+    }
+
     public String get_toiletuse() {
         return _toiletuse;
     }
+
+    public String get_toiletuseParse() {
+        String parsed="";
+        switch (_houseowner) {
+            case "1":
+                parsed= "Yes";
+                break;
+            case "0":
+                parsed = "No";
+                break;
+        }
+        return parsed;
+    }
+
 
     public String get_toilet() {
         return _toilet;
     }
 
+    public String get_toiletParse() {
+        String parsed="";
+        switch (_houseowner) {
+            case "1":
+                parsed= "Yes";
+                break;
+            case "0":
+                parsed = "No";
+                break;
+        }
+        return parsed;
+    }
+
+
     public String get_cook() {
         return _cook;
     }
+
+    public String get_cookParse(String bitString) {
+
+        String uncompress= " ";
+        bitString = bitString.substring(1, bitString.length()-1);
+        String[] parsed = split(bitString, ", ");
+
+        for(int i=0;i<parsed.length;i++)
+        {
+            if(parsed[i].equals("0")){
+                uncompress += "Light,";
+            }
+
+            if(parsed[i].equals("1")){
+                uncompress += "Gas,";
+            }
+
+            if(parsed[i].equals("2")){
+                uncompress += "Coal,";
+            }
+
+            if(parsed[i].equals("3")){
+                uncompress += "Wood,";
+            }
+
+            if(parsed[i].equals("4")){
+                uncompress += "Others,";
+            }
+        }
+Log.e("works","yes");
+        return uncompress;
+    }
+
 
     public String get_kitchen() {
         return _kitchen;
     }
 
+    public String get_kitchenParse() {
+        String parsed="";
+        switch (_houseowner) {
+            case "1":
+                parsed= "Yes";
+                break;
+            case "0":
+                parsed = "No";
+                break;
+        }
+        return parsed;
+    }
+
+
     public String get_water() {
         return _water;
+    }
+
+    public String get_waterParse(String bitString) {
+
+        String uncompress= " ";
+        bitString = bitString.substring(1, bitString.length()-1);
+        String[] parsed = split(bitString, ", ");
+
+        for(int i=0;i<parsed.length;i++)
+        {
+            if(parsed[i].equals("0")){
+                uncompress += "Well,";
+            }
+
+            if(parsed[i].equals("1")){
+                uncompress += "Handpump,";
+            }
+
+            if(parsed[i].equals("2")){
+                uncompress += "Tap,";
+            }
+
+            if(parsed[i].equals("3")){
+                uncompress += "Lake,";
+            }
+
+            if(parsed[i].equals("4")){
+                uncompress += "River,";
+            }
+
+            if(parsed[i].equals("5")){
+                uncompress += "Canal,";
+            }
+        }
+
+        return uncompress;
     }
 
     public String get_date() {
@@ -118,5 +317,34 @@ public class Census {
     public String get_religion() {
         return _religion;
     }
+
+    public String get_religionParse() {
+        String parsed = "";
+        switch (_religion) {
+            case "1":
+                _religion = "Hindu";
+                break;
+            case "2":
+                _religion = "Muslim";
+                break;
+            case "4":
+                _religion = "Christian";
+                break;
+            case "8":
+               _religion = "Sikh";
+                break;
+            case "16":
+                _religion = "Jain";
+                break;
+            case "32":
+                _religion = "Buddhism";
+                break;
+        }
+
+        return parsed;
+    }
+
+
 }
+
 

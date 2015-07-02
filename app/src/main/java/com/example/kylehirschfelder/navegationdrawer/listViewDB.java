@@ -123,6 +123,7 @@ public class listViewDB extends AppCompatActivity {
                 view = getLayoutInflater().inflate(R.layout.listview_item,parent, false);
 
             Census currentCensus = censusList.get(position);
+            //Log.e("COOK", currentCensus.get_cook());
 
             TextView familyid = (TextView) view.findViewById(R.id.editFamId);
             familyid.setText(currentCensus.get_famid_str());
@@ -143,34 +144,36 @@ public class listViewDB extends AppCompatActivity {
             abus3.setText(currentCensus.get_abus3());
 
             TextView walls = (TextView) view.findViewById(R.id.editWalls);
-            walls.setText(currentCensus.get_wall());
+            walls.setText(currentCensus.get_wallParse(currentCensus.get_wall()));
 
             TextView religion = (TextView) view.findViewById(R.id.editReligion);
-            religion.setText(currentCensus.get_religion());
+            religion.setText(currentCensus.get_religionParse());
 
             TextView houseOwner = (TextView) view.findViewById(R.id.editHouseOwner);
-            houseOwner.setText(currentCensus.get_houseowner());
+            houseOwner.setText(currentCensus.get_houseOwnerParse());
 
             TextView elec = (TextView) view.findViewById(R.id.editElec);
-            elec.setText(currentCensus.get_electricity());
+            elec.setText(currentCensus.get_electricityParse());
 
             TextView roof = (TextView) view.findViewById(R.id.editRoof);
-            roof.setText(currentCensus.get_roof());
+            roof.setText(currentCensus.get_roofParse(currentCensus.get_roof()));
 
             TextView cooking = (TextView) view.findViewById(R.id.editCooking);
-            cooking.setText(currentCensus.get_cook());
+            cooking.setText(currentCensus.get_cookParse(currentCensus.get_cook()));
+
+            //Log.e("COOK", currentCensus.get_cook());
 
             TextView water = (TextView) view.findViewById(R.id.editWater);
-            water.setText(currentCensus.get_water());
+            water.setText(currentCensus.get_waterParse(currentCensus.get_water()));
 
             TextView toilet = (TextView) view.findViewById(R.id.editToilet);
-            toilet.setText(currentCensus.get_toilet());
+            toilet.setText(currentCensus.get_toiletParse());
 
             TextView toiletUser = (TextView) view.findViewById(R.id.editToiletUsers);
-            toiletUser.setText(currentCensus.get_toiletuse());
+            toiletUser.setText(currentCensus.get_toiletuseParse());
 
             TextView kitchen = (TextView) view.findViewById(R.id.editKitchen);
-            kitchen.setText(currentCensus.get_kitchen());
+            kitchen.setText(currentCensus.get_kitchenParse());
 
             return view;
         }

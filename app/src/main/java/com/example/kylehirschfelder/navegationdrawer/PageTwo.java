@@ -354,9 +354,12 @@ public class PageTwo extends AppCompatActivity implements AdapterView.OnItemSele
                         String.valueOf(isToilet), String.valueOf(isToiletUser), String.valueOf(cook.toString()),
                         String.valueOf(isKitchen), String.valueOf(water.toString()), String.valueOf(newDate));
 
+                //census.get_wallParse(wall.toString());
+                //Log.e("COOK", census.get_cook());
+
                 dbHandler.createCensus(census);
                 censusList.add(census);
-
+                //dbHandler.deleteAll();
                 InputStream is;
 
 
