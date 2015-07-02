@@ -300,11 +300,12 @@
             />
 
         <Button
-            android:layout_width="fill_parent"
+            android:layout_width="115dp"
             android:layout_height="wrap_content"
             android:text="Submit"
             android:id="@+id/submitBtn"
             android:layout_marginTop="20dp"/>
+
 
     </LinearLayout>
 </LinearLayout>

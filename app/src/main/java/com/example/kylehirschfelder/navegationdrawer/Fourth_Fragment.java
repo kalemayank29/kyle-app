@@ -38,11 +38,14 @@ public class Fourth_Fragment extends Fragment {
     Button formButton;
     Button dbButton;
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
 
         myView = inflater.inflate(R.layout.fourth_layout, container,false);
         formButton = (Button) myView.findViewById(R.id.formOneButton);

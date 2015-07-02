@@ -89,7 +89,7 @@
             android:layout_marginTop="120dp"
             android:id="@+id/submit"
             android:theme="@android:style/Theme.Holo"
-            android:textSize="17dp"/>
+            android:textSize="71dp"/>
 
         </LinearLayout>
 

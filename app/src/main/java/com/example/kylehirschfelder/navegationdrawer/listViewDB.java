@@ -4,6 +4,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +25,8 @@ import java.util.List;
 
 public class listViewDB extends AppCompatActivity {
 
+
+    private static final int EDIT = 0, DELETE = 1;
     ListView lv;
     DatabaseHandler db = new DatabaseHandler(this);
     List<Census> censusList = new ArrayList<Census>();
@@ -46,12 +49,20 @@ public class listViewDB extends AppCompatActivity {
             censusList.addAll(db.getAllCensus());
         }
         populateList();
+
+        registerForContextMenu(lv);
+        lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                longClickItemIndex = position;
+                return false;
+            }
+        });
     }
 
     public void populateList(){
         censusAdapter = new CensusListAdapter();
         lv.setAdapter(censusAdapter);
-        Log.w("made it to:", " populate list function");
     }
 
     @Override
@@ -59,6 +70,32 @@ public class listViewDB extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_list_view_db, menu);
         return true;
+    }
+
+
+    public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo info){
+        super.onCreateContextMenu(menu, view, info);
+        menu.setHeaderIcon(R.drawable.edit_icon);
+        menu.setHeaderTitle("Census Options");
+        menu.add(Menu.NONE, EDIT, menu.NONE, "Edit Census");
+        menu.add(Menu.NONE, DELETE, menu.NONE, "Delete Census");
+
+    }
+
+
+    public boolean onContextItemSelected(MenuItem item){
+        switch(item.getItemId()){
+            case EDIT:
+                //TODO: Implement editing a patient
+                break;
+            case DELETE:
+
+                db.deleteContact(censusList.get(longClickItemIndex));
+                censusList.remove(longClickItemIndex);
+                censusAdapter.notifyDataSetChanged();
+                break;
+        }
+        return super.onContextItemSelected(item);
     }
 
     @Override
@@ -72,10 +109,8 @@ public class listViewDB extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
-
 
     private class CensusListAdapter extends ArrayAdapter<Census> {
         public CensusListAdapter(){
@@ -90,7 +125,7 @@ public class listViewDB extends AppCompatActivity {
             Census currentCensus = censusList.get(position);
 
             TextView familyid = (TextView) view.findViewById(R.id.editFamId);
-            familyid.setText(currentCensus.get_famid());
+            familyid.setText(currentCensus.get_famid_str());
 
             TextView caste = (TextView) view.findViewById(R.id.editCaste);
             caste.setText(currentCensus.get_caste());
@@ -136,9 +171,8 @@ public class listViewDB extends AppCompatActivity {
 
             TextView kitchen = (TextView) view.findViewById(R.id.editKitchen);
             kitchen.setText(currentCensus.get_kitchen());
-            Log.w("made it to:", " census list adapter end");
+
             return view;
         }
     }
-
 }

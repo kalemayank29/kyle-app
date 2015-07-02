@@ -1,7 +1,10 @@
 package com.example.kylehirschfelder.navegationdrawer;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.StrictMode;
+import android.provider.Settings;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,12 +35,17 @@ import org.apache.http.message.BasicNameValuePair;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.BitSet;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class PageTwo extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+
 
     Spinner spinToilets, spinToiletUser, separate_kitchenSpinner;
 
@@ -62,12 +70,11 @@ public class PageTwo extends AppCompatActivity implements AdapterView.OnItemSele
     Button submit;
 
     List<Census> censusList = new ArrayList<Census>();
-
+    Bundle bundle;
     DatabaseHandler dbHandler;
     ArrayAdapter<Census> censusAdapter;
 
     int longClickItemIndex;
-
 
     @SuppressLint("NewApi")
     @Override
@@ -78,11 +85,12 @@ public class PageTwo extends AppCompatActivity implements AdapterView.OnItemSele
 
         super.onCreate(savedInstanceState);
         Bundle data = getIntent().getExtras();
+
         setContentView(R.layout.page_two);
 
         submit = (Button) findViewById(R.id.submitBtn);
         dbHandler = new DatabaseHandler(getApplicationContext());
-        //lv = (ListView) findViewById(R.id.listView3);
+
         cementBox = (CheckBox) findViewById(R.id.cementCheck);
         mangaloreBox = (CheckBox) findViewById(R.id.mangaloreCheck);
         normal_tilesBox = (CheckBox) findViewById(R.id.normalCheck);
@@ -133,6 +141,7 @@ public class PageTwo extends AppCompatActivity implements AdapterView.OnItemSele
             @Override
             public void onClick(View v) {
 
+
                 cement = cementBox.isChecked();
                 mangalore = mangaloreBox.isChecked();
                 normal_tiles = normal_tilesBox.isChecked();
@@ -151,65 +160,71 @@ public class PageTwo extends AppCompatActivity implements AdapterView.OnItemSele
                 canal = canalBox.isChecked();
                 handpump = handpumpBox.isChecked();
 
-                if(cement) isCement = "1";
-                    else isCement = "0";
-                if(mangalore) isMangalore = "2";
-                    else isMangalore = "0";
-                if(normal_tiles) isNormal_tiles = "4";
-                    else isNormal_tiles = "0";
-                if(tin) isTin = "8";
-                    else isTin = "0";
-                if(grass) isGrass = "16";
-                    else isGrass = "0";
-                if(other_roof) isOther_roof = "32";
-                    else isOther_roof = "0";
+                if (cement) isCement = "1";
+                else isCement = "0";
+                if (mangalore) isMangalore = "2";
+                else isMangalore = "0";
+                if (normal_tiles) isNormal_tiles = "4";
+                else isNormal_tiles = "0";
+                if (tin) isTin = "8";
+                else isTin = "0";
+                if (grass) isGrass = "16";
+                else isGrass = "0";
+                if (other_roof) isOther_roof = "32";
+                else isOther_roof = "0";
 
 
-                if(light) isLight = "1";
-                    else isLight = "0";
-                if(gas) isGas = "2";
-                    else isGas = "0";
-                if(coal) isCoal = "4";
-                    else isCoal = "0";
-                if(wood) isWood = "8";
-                    else isWood = "0";
-                if(other_cooking) isOther_cooking = "16";
-                    else isOther_cooking = "0";
+                if (light) isLight = "1";
+                else isLight = "0";
+                if (gas) isGas = "2";
+                else isGas = "0";
+                if (coal) isCoal = "4";
+                else isCoal = "0";
+                if (wood) isWood = "8";
+                else isWood = "0";
+                if (other_cooking) isOther_cooking = "16";
+                else isOther_cooking = "0";
 
 
-                if(well) isWell = "1";
-                    else isWell = "0";
-                if(tap) isTap = "4";
-                    else isTap = "0";
-                if(lake) isLake = "8";
-                    else isLake = "0";
-                if(river) isRiver = "16";
-                    else isRiver = "0";
-                if(canal) isCanal = "32";
-                    else isCanal = "0";
-                if(handpump) isHandpump = "2";
-                    else isHandpump = "0";
+                if (well) isWell = "1";
+                else isWell = "0";
+                if (tap) isTap = "4";
+                else isTap = "0";
+                if (lake) isLake = "8";
+                else isLake = "0";
+                if (river) isRiver = "16";
+                else isRiver = "0";
+                if (canal) isCanal = "32";
+                else isCanal = "0";
+                if (handpump) isHandpump = "2";
+                else isHandpump = "0";
 
                 isToilet = spinToilets.getSelectedItem().toString();
                 isToiletUser = spinToiletUser.getSelectedItem().toString();
                 isKitchen = separate_kitchenSpinner.getSelectedItem().toString();
 
-                switch(isToilet){
-                    case "Yes": isToilet = "1";
+                switch (isToilet) {
+                    case "Yes":
+                        isToilet = "1";
                         break;
-                    case "No": isToilet = "0";
-                        break;
-                }
-                switch(isToiletUser){
-                    case "Yes": isToiletUser = "1";
-                        break;
-                    case "No": isToiletUser = "0";
+                    case "No":
+                        isToilet = "0";
                         break;
                 }
-                switch(isKitchen){
-                    case "Yes": isKitchen = "1";
+                switch (isToiletUser) {
+                    case "Yes":
+                        isToiletUser = "1";
                         break;
-                    case "No": isKitchen = "0";
+                    case "No":
+                        isToiletUser = "0";
+                        break;
+                }
+                switch (isKitchen) {
+                    case "Yes":
+                        isKitchen = "1";
+                        break;
+                    case "No":
+                        isKitchen = "0";
                         break;
                 }
 
@@ -217,8 +232,8 @@ public class PageTwo extends AppCompatActivity implements AdapterView.OnItemSele
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                 String newDate = df.format(c.getTime());
 
-                InputStream is;
-                List<NameValuePair> NameValuePairs = new ArrayList<NameValuePair>();
+                final ArrayList<NameValuePair> NameValuePairs = new ArrayList<NameValuePair>();
+
 
                 NameValuePairs.add(new BasicNameValuePair("family_id", isFam));
                 NameValuePairs.add(new BasicNameValuePair("caste", caste));
@@ -256,81 +271,83 @@ public class PageTwo extends AppCompatActivity implements AdapterView.OnItemSele
                 NameValuePairs.add(new BasicNameValuePair("water_f", isCanal));
                 NameValuePairs.add(new BasicNameValuePair("date", newDate));
 
-                //..................................................................................
+
+                //.....................LOCAL DATABASE PARSING BEGINS HERE...........................
+
                 BitSet wall = new BitSet(5);
                 BitSet roof = new BitSet(6);
                 BitSet cook = new BitSet(5);
                 BitSet water = new BitSet(6);
 
-                if(!wall_a.equals("0"))
+                if (!wall_a.equals("0"))
                     wall.flip(0);
 
-                if(!wall_b.equals("0"))
+                if (!wall_b.equals("0"))
                     wall.flip(1);
 
-                if(!wall_c.equals("0"))
+                if (!wall_c.equals("0"))
                     wall.flip(2);
 
-                if(!wall_d.equals("0"))
+                if (!wall_d.equals("0"))
                     wall.flip(3);
 
-                if(!wall_e.equals("0"))
+                if (!wall_e.equals("0"))
                     wall.flip(4);
 
 
-                if(!isCement.equals("0"))
+                if (!isCement.equals("0"))
                     roof.flip(0);
 
-                if(!isMangalore.equals("0"))
+                if (!isMangalore.equals("0"))
                     roof.flip(1);
 
-                if(!isNormal_tiles.equals("0"))
+                if (!isNormal_tiles.equals("0"))
                     roof.flip(2);
 
-                if(!isTin.equals("0"))
+                if (!isTin.equals("0"))
                     roof.flip(3);
 
-                if(!isGrass.equals("0"))
+                if (!isGrass.equals("0"))
                     roof.flip(4);
 
-                if(!isOther_roof.equals("0"))
+                if (!isOther_roof.equals("0"))
                     roof.flip(5);
 
 
-                if(!isLight.equals("0"))
+                if (!isLight.equals("0"))
                     cook.flip(0);
 
-                if(!isGas.equals("0"))
+                if (!isGas.equals("0"))
                     cook.flip(1);
 
-                if(!isCoal.equals("0"))
+                if (!isCoal.equals("0"))
                     cook.flip(2);
 
-                if(!isWood.equals("0"))
+                if (!isWood.equals("0"))
                     cook.flip(3);
 
-                if(!isOther_cooking.equals("0"))
+                if (!isOther_cooking.equals("0"))
                     cook.flip(4);
 
 
-                if(!isWell.equals("0"))
+                if (!isWell.equals("0"))
                     water.flip(0);
 
-                if(!isHandpump.equals("0"))
+                if (!isHandpump.equals("0"))
                     water.flip(1);
 
-                if(!isTap.equals("0"))
+                if (!isTap.equals("0"))
                     water.flip(2);
 
-                if(!isLake.equals("0"))
+                if (!isLake.equals("0"))
                     water.flip(3);
 
-                if(!isRiver.equals("0"))
+                if (!isRiver.equals("0"))
                     water.flip(4);
 
-                //..................................................................................
+                //.......................END PARSING................................................
 
-                Census census = new Census(dbHandler.getCensusCount(),String.valueOf(caste),
+                Census census = new Census(dbHandler.getCensusCount(), String.valueOf(caste),
                         String.valueOf(isReligion), String.valueOf(pbus), String.valueOf(abus1),
                         String.valueOf(abus2), String.valueOf(abus3), String.valueOf(wall.toString()),
                         String.valueOf(roof.toString()), String.valueOf(isElec), String.valueOf(isHouse_owner),
@@ -340,24 +357,21 @@ public class PageTwo extends AppCompatActivity implements AdapterView.OnItemSele
                 dbHandler.createCensus(census);
                 censusList.add(census);
 
-                if(censusList.isEmpty())
-                    Log.w("This is ", "empty");
-                else
-                    Log.w(censusList.toString(), "here");
+                InputStream is;
 
 
                 try {
-                    HttpClient httpClient = new DefaultHttpClient();
-                    HttpPost httpPost = new HttpPost("http://45.55.84.23/census/submit");
-                    httpPost.setEntity(new UrlEncodedFormEntity(NameValuePairs));
-                    HttpResponse response = httpClient.execute(httpPost);
-                    HttpEntity entity = response.getEntity();
-                    is = entity.getContent();
+                        HttpClient httpClient = new DefaultHttpClient();
+                        HttpPost httpPost = new HttpPost("http://45.55.84.23/census/submit");
+                        httpPost.setEntity(new UrlEncodedFormEntity(NameValuePairs));
+                        HttpResponse response = httpClient.execute(httpPost);
+                        HttpEntity entity = response.getEntity();
+                        is = entity.getContent();
 
                     //informs the user that their bug was submitted successfully
                     String msg = "Your form has been submitted";
                     Toast.makeText(getBaseContext(), msg, Toast.LENGTH_LONG).show();
-                    Log.w(NameValuePairs.toString(), "Here");
+
 
                 } catch (ClientProtocolException e) {
                     Log.e("ClientProtocol", "log_tag");
@@ -366,10 +380,8 @@ public class PageTwo extends AppCompatActivity implements AdapterView.OnItemSele
                     Log.e("log_tag", "IOException");
                     e.printStackTrace();
                 }
-
             }
         });
-
     }
 
     public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo info){

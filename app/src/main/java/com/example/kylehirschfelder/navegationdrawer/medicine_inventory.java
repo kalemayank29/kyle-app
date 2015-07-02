@@ -105,8 +105,6 @@ public class medicine_inventory extends AppCompatActivity {
                     Log.e("log_tag", "IOException");
                     e.printStackTrace();
                 }
-
-
             }
         });
     }

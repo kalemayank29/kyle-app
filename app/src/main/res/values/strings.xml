@@ -10,7 +10,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_example">Example action</string>
+    <string name="action_example">Settings</string>
 
     <string name="action_settings">Settings</string>
 
@@ -96,9 +96,9 @@
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_form_1">Form_1</string>
-    <string name="title_activity_page_one">PageOne</string>
-    <string name="title_activity_page_two">PageTwo</string>
+    <string name="title_activity_page_one">Census Form Page 1</string>
+    <string name="title_activity_page_two">Census Form Page 2</string>
     <string name="title_activity_view_census_table">viewCensusTable</string>
-    <string name="title_activity_list_view_db">listViewDB</string>
-    <string name="title_activity_medicine_inventory">medicine_inventory</string>
+    <string name="title_activity_list_view_db">Census Forms</string>
+    <string name="title_activity_medicine_inventory">Medicine Inventory</string>
 </resources>

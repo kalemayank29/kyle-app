@@ -1,12 +1,18 @@
 package com.example.kylehirschfelder.navegationdrawer;
 
+import android.util.Log;
+import java.util.BitSet;
+
 public class Census {
 
     private String _caste, _pbus, _abus1, _abus2, _abus3, _wall,
                 _roof, _electricity, _houseowner, _toiletuse,
                 _toilet, _cook, _kitchen, _water, _date, _religion;
 
+
     private int _famid;
+
+    BitSet wallBit;
 
     public Census(int _famid, String _caste, String _religion, String _pbus,
                   String _abus1, String _abus2,
@@ -63,6 +69,14 @@ public class Census {
 
     public String get_wall() {
         return _wall;
+    }
+
+    public String get_wallParse(String bitString) {
+
+        bitString = bitString.substring(1, bitString.length()-1);
+        //bitString = StringUtils.strip(bitString, null);
+        Log.w(bitString, "Testing substring");
+        return bitString;
     }
 
     public String get_roof() {

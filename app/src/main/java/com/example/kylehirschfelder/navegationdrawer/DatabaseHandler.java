@@ -45,7 +45,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db){
         db.execSQL("CREATE TABLE IF NOT EXISTS "
                 + TABLE_CENSUS + "("
-                + KEY_FAMID + " INTEGER PRIMARY KEY AUTO INCREMENT, "
+                + KEY_FAMID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + KEY_CASTE + " VARCHAR, "
                 + KEY_RELIGION + " VARCHAR, "
                 + KEY_PBUS + " VARCHAR, "
@@ -96,32 +96,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    public Census getCensus(int id){
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(TABLE_CENSUS, new String[] {KEY_FAMID, KEY_CASTE, KEY_RELIGION,
-                KEY_PBUS, KEY_ABUS1, KEY_ABUS2, KEY_ABUS3, KEY_WALL, KEY_ROOF, KEY_ELECTRICITY, KEY_HOUSEOWNER, KEY_TOILET,
-                KEY_TOILETUSE, KEY_WATER, KEY_DATE }, KEY_FAMID + "=?", new String[] {String.valueOf(id)}, null, null, null, null);
-
-        if(cursor != null)
-            cursor.moveToFirst();
-
-        Census census = new Census(Integer.parseInt(cursor.getString(0)), cursor.getString(1),
-                cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(5),
-                cursor.getString(6),cursor.getString(7),cursor.getString(8),cursor.getString(9),
-                cursor.getString(10),cursor.getString(11),cursor.getString(12),cursor.getString(13),
-                cursor.getString(14),cursor.getString(15),cursor.getString(16));
-        db.close();
-        cursor.close();
-        return census;
-    }
-
     public void deleteContact(Census census){
 
         SQLiteDatabase db = getWritableDatabase();
         db.delete(TABLE_CENSUS, KEY_FAMID + "=?", new String[] {String.valueOf(census.get_famid())});
         db.close();
     }
-
 
     public int getCensusCount(){
 
@@ -140,25 +120,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         if(cursor.moveToFirst()){
             do{
-                censusList.add(new Census(Integer.parseInt(cursor.getString(0)), cursor.getString(1),
+                Census element = new Census(Integer.parseInt(cursor.getString(0)), cursor.getString(1),
                         cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(5),
                         cursor.getString(6),cursor.getString(7),cursor.getString(8),cursor.getString(9),
                         cursor.getString(10),cursor.getString(11),cursor.getString(12),cursor.getString(13),
-                        cursor.getString(14),cursor.getString(15),cursor.getString(16)));
-
+                        cursor.getString(14),cursor.getString(15),cursor.getString(16));
+                censusList.add(element);
             }
             while(cursor.moveToNext());
-
 
         }
         cursor.close();
         db.close();
         return censusList;
-    }
-
-    public void deleteAll() {
-        SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CENSUS);
-        db.close();
     }
 }
