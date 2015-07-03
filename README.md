@@ -12,3 +12,4 @@ Kyle's masterpeice
 * Create 2 tables, one for scratch data and the other for curated data. These should be in Sync.
 * Only push to the Monkey InterWeb from the curated table.
 * Log.e fields before populating anything to ensure non-NULLness.
+* Before submitting to HTTP, use if-then statement & Toast to verify all fields have been entered.
